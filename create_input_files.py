@@ -2,7 +2,7 @@ import sys
 import json
 
 def parse_order_details(raw_data):
-    return json.load(raw_data)
+    return json.loads(raw_data)
 
 if __name__ == "__main__":
 
