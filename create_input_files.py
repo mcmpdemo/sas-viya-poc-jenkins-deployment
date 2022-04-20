@@ -1,4 +1,4 @@
 import logging
 
 if __name__ == "__main__":
-    logging.info("Generating input files...")
+    print("Generating input files...")
