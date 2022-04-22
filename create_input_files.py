@@ -60,6 +60,8 @@ if __name__ == "__main__":
     
     ID_RSA = sys.argv[10]
 
+    CADENCE_VERSION = sys.argv[11]
+
     print("Getting order details...")
     order_details = get_order_details(USER_NAME, API_KEY, ORDER_NUMBER, TENANT_API_URL)
 
