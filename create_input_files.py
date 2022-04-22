@@ -1,5 +1,4 @@
 import sys
-import json
 import base64
 import requests
 
@@ -43,15 +42,15 @@ if __name__ == "__main__":
     API_KEY = sys.argv[2]
     ORDER_NUMBER = sys.argv[3]
     TENANT_API_URL = sys.argv[4]
+    TF_STATE_FILE = sys.argv[5]
+    #ANSIBLE_VARS_TEMPLATE = sys.argv[5]
 
     order_details = get_order_details(USER_NAME, API_KEY, ORDER_NUMBER, TENANT_API_URL)
 
-    print(order_details)
+    print("Creating terraform tf state file...")
+    create_terraform_file(TF_STATE_FILE)
 
     '''
-    print("Creating terraform tf state file...")
-    create_terraform_file(order_details['tf_state_file'])
-
     print("Creating ansible vars file file...")
     create_ansible_vars_file(order_details)
     '''
