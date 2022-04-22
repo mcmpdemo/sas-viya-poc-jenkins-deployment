@@ -1,6 +1,7 @@
 import sys
 import base64
 import requests
+import yaml
 
 NAMESPACE = "viya-4-sas-ns"
 
@@ -23,16 +24,11 @@ def create_terraform_file(raw_data):
     tf_state_file.write(decoded)
     tf_state_file.close()
 
-def create_ansible_vars_file(order_details):
-
-    ansible_vars = open("ansible-vars.yaml", "a")
-
-    ansible_vars.write("NAMESPACE: {0}\n\n".format(NAMESPACE))
-    ansible_vars.write("DEPLOY: true\n\n")
-    ansible_vars.write("V4_CFG_MANAGE_STORAGE: true\n\n")
-    ansible_vars.write("V4_CFG_SAS_API_KEY: '{0}'\n\n".format(order_details['v4_cfg_sas_api_key']))
-
-    ansible_vars.close()
+def create_ansible_vars_template(raw_data):
+    ansible_vars_file = open("ansible-vars.yaml", "w")
+    decoded = str(base64.b64decode(raw_data), "utf-8")
+    ansible_vars_file.write(decoded)
+    ansible_vars_file.close()
 
 if __name__ == "__main__":
 
@@ -41,16 +37,14 @@ if __name__ == "__main__":
     ORDER_NUMBER = sys.argv[3]
     TENANT_API_URL = sys.argv[4]
     TF_STATE_FILE = sys.argv[5]
-    #ANSIBLE_VARS_TEMPLATE = sys.argv[5]
-    
+    ANSIBLE_VARS_TEMPLATE = sys.argv[6]
+
     print("Getting order details...")
     order_details = get_order_details(USER_NAME, API_KEY, ORDER_NUMBER, TENANT_API_URL)
 
     print("Creating terraform tf state file...")
     create_terraform_file(TF_STATE_FILE)
 
-    '''
-    print("Creating ansible vars file file...")
-    create_ansible_vars_file(order_details)
-    '''
+    print("Creating ansible vars template file...")
+    create_ansible_vars_template(ANSIBLE_VARS_TEMPLATE)
 
