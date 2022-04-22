@@ -2,6 +2,7 @@ import sys
 import base64
 import requests
 import yaml
+import json
 
 NAMESPACE = "viya-4-sas-ns"
 
@@ -28,7 +29,8 @@ def get_sas_portal_token(api_key,api_secret):
     SCOPES = "getCertificates getDepAssets getDepAssetsShort getLicense"
     ENDPOINT = "https://api.sas.com/mysas/token?grant_type=client_credentials&client_id={0}&client_secret={1}&scope={2}"
 
-    response = requests.post( url=ENDPOINT.format(api_key, api_secret,SCOPES) )
+    body = { "client_id": api_key, "client_secret": api_secret }
+    response = requests.post( url=ENDPOINT.format(api_key, api_secret,SCOPES), data=json.dumps(body) )
 
     print(response.status_code)
     print(response.text)
