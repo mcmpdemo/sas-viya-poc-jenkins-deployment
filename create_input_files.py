@@ -35,8 +35,7 @@ def get_sas_portal_token(api_key,api_secret):
 
     response = requests.post(url=ENDPOINT, data=payload, headers=headers)
 
-    print(response.status_code)
-    print(response.text)
+    return response.json()["access_token"]
 
 
 if __name__ == "__main__":
@@ -52,6 +51,8 @@ if __name__ == "__main__":
     V4_CFG_SAS_API_KEY = sys.argv[7]
     V4_CFG_SAS_API_SECRET = sys.argv[8]
 
+    V4_CFG_ORDER_NUMBER = sys.argv[9]
+
     print("Getting order details...")
     order_details = get_order_details(USER_NAME, API_KEY, ORDER_NUMBER, TENANT_API_URL)
 
@@ -62,5 +63,5 @@ if __name__ == "__main__":
     create_ansible_vars_template(ANSIBLE_VARS_TEMPLATE)
 
     print("Get sas portal token...")
-    get_sas_portal_token(V4_CFG_SAS_API_KEY, V4_CFG_SAS_API_SECRET)
+    token = get_sas_portal_token(V4_CFG_SAS_API_KEY, V4_CFG_SAS_API_SECRET)
 
