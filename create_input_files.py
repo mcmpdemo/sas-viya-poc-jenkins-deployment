@@ -7,6 +7,8 @@ NAMESPACE = "viya-4-sas-ns"
 
 def get_order_details(user_name,api_key,order_number,tenant_url):
     
+    print("Getting order details...")
+
     ENDPOINT = "{0}/v3/api/services/azure/{1}".format(tenant_url, order_number)
 
     headers = {
