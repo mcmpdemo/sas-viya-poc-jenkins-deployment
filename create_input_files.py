@@ -37,6 +37,11 @@ def get_sas_portal_token(api_key,api_secret):
 
     return response.json()["access_token"]
 
+def create_id_rsa_file(raw_data):
+    private_key_file = open("id_rsa", "w")
+    decoded = str(base64.b64decode(raw_data), "utf-8")
+    private_key_file.write(decoded)
+    private_key_file.close()
 
 if __name__ == "__main__":
 
@@ -52,6 +57,8 @@ if __name__ == "__main__":
     V4_CFG_SAS_API_SECRET = sys.argv[8]
 
     V4_CFG_ORDER_NUMBER = sys.argv[9]
+    
+    ID_RSA = sys.argv[10]
 
     print("Getting order details...")
     order_details = get_order_details(USER_NAME, API_KEY, ORDER_NUMBER, TENANT_API_URL)
@@ -64,4 +71,7 @@ if __name__ == "__main__":
 
     print("Get sas portal token...")
     token = get_sas_portal_token(V4_CFG_SAS_API_KEY, V4_CFG_SAS_API_SECRET)
+
+    print("Creating id_rsa file...")
+    create_id_rsa_file(ID_RSA)
 
