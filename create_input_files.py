@@ -1,9 +1,9 @@
 import sys
 import base64
 import requests
+import urllib.parse as urllib
 import yaml
 import json
-import http.client
 
 NAMESPACE = "viya-4-sas-ns"
 
@@ -27,19 +27,16 @@ def create_ansible_vars_template(raw_data):
 
 def get_sas_portal_token(api_key,api_secret):
     
-    SCOPES = "getCertificates+getDepAssets+getDepAssetsShort+getLicense"
+    SCOPES = "getCertificates getDepAssets getDepAssetsShort getLicense"
     ENDPOINT = "https://api.sas.com/mysas/token"
 
-    conn = http.client.HTTPSConnection("")
-    payload = "grant_type=client_credentials&client_id={0}&client_secret={1}&scope={2}".format(api_key, api_secret,SCOPES)
+    payload = "grant_type=client_credentials&client_id={0}&client_secret={1}&scope={2}".format(api_key, api_secret,urllib.quote(SCOPES))
     headers = { 'content-type': "application/x-www-form-urlencoded" }
 
-    conn.request("POST", ENDPOINT, payload, headers)
+    response = requests.post(url=ENDPOINT, data=payload, headers=headers)
 
-    res = conn.getresponse()
-    data = res.read()
-
-    print(data.decode("utf-8"))
+    print(response.status_code)
+    print(response.text)
 
 
 if __name__ == "__main__":
