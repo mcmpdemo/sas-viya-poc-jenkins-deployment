@@ -6,8 +6,6 @@ NAMESPACE = "viya-4-sas-ns"
 
 def get_order_details(user_name,api_key,order_number,tenant_url):
     
-    print("Getting order details...")
-
     ENDPOINT = "{0}/v3/api/services/azure/{1}".format(tenant_url, order_number)
 
     headers = {
@@ -44,7 +42,8 @@ if __name__ == "__main__":
     TENANT_API_URL = sys.argv[4]
     TF_STATE_FILE = sys.argv[5]
     #ANSIBLE_VARS_TEMPLATE = sys.argv[5]
-
+    
+    print("Getting order details...")
     order_details = get_order_details(USER_NAME, API_KEY, ORDER_NUMBER, TENANT_API_URL)
 
     print("Creating terraform tf state file...")
