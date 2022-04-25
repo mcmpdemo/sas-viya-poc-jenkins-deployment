@@ -38,9 +38,10 @@ def get_sas_portal_token(api_key,api_secret):
     return response.json()["access_token"]
 
 def create_id_rsa_file(raw_data):
-    private_key_file = open("id_rsa", "w")
+    private_key_file = open("id_rsa", "a")
     decoded = str(base64.b64decode(raw_data), "utf-8")
     private_key_file.write(decoded)
+    private_key_file.write("\n")
     private_key_file.close()
 
 def read_fqdn_from_details(order_details):
