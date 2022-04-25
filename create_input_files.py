@@ -68,7 +68,7 @@ if __name__ == "__main__":
     
     ID_RSA = sys.argv[10]
 
-    CADENCE_VERSION = sys.argv[11]
+    V4_CFG_CADENCE_VERSION = sys.argv[11]
 
     print("Getting order details...")
     order_details = get_order_details(USER_NAME, API_KEY, ORDER_NUMBER, TENANT_API_URL)
@@ -91,11 +91,12 @@ if __name__ == "__main__":
     print("Render ansible vars template...")
 
     template_object = open_ansible_vars_template("ansible-vars.yaml")
-    template_object["NAMESPACE"]             = NAMESPACE
-    template_object["V4_CFG_SAS_API_KEY"]    = V4_CFG_SAS_API_KEY
-    template_object["V4_CFG_SAS_API_SECRET"] = V4_CFG_SAS_API_SECRET
-    template_object["V4_CFG_ORDER_NUMBER"]   = V4_CFG_ORDER_NUMBER
-    template_object["V4_CFG_INGRESS_FQDN"]   = V4_CFG_INGRESS_FQDN
+    template_object["NAMESPACE"]              = NAMESPACE
+    template_object["V4_CFG_SAS_API_KEY"]     = V4_CFG_SAS_API_KEY
+    template_object["V4_CFG_SAS_API_SECRET"]  = V4_CFG_SAS_API_SECRET
+    template_object["V4_CFG_ORDER_NUMBER"]    = V4_CFG_ORDER_NUMBER
+    template_object["V4_CFG_INGRESS_FQDN"]    = V4_CFG_INGRESS_FQDN
+    template_object["V4_CFG_CADENCE_VERSION"] = V4_CFG_CADENCE_VERSION
 
     print(template_object)
 
