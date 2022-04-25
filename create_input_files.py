@@ -91,6 +91,7 @@ if __name__ == "__main__":
     print("Render ansible vars template...")
 
     template_object, ansible_vars_template = open_ansible_vars_template("ansible-vars.yaml")
+    print(template_object)
     template_object["NAMESPACE"]              = NAMESPACE
     template_object["V4_CFG_SAS_API_KEY"]     = V4_CFG_SAS_API_KEY
     template_object["V4_CFG_SAS_API_SECRET"]  = V4_CFG_SAS_API_SECRET
