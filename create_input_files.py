@@ -44,7 +44,7 @@ def create_id_rsa_file(raw_data):
     private_key_file.close()
 
 def read_fqdn_from_details(order_details):
-    return "jp-sas-viya-4-aks-91f5b069.hcp.eastus.azmk8s.io"
+    return "20.232.80.158"
 
 def open_ansible_vars_template(filename):
     ansible_vars_template = open(filename)
