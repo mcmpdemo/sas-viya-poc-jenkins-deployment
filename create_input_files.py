@@ -47,7 +47,7 @@ def read_fqdn_from_details(order_details):
     return "jp-sas-viya-4-aks-91f5b069.hcp.eastus.azmk8s.io"
 
 def open_ansible_vars_template(filename):
-    ansible_vars_template = open(filename, "w")
+    ansible_vars_template = open(filename, "w+")
     data = yaml.load( ansible_vars_template, Loader=yaml.loader.SafeLoader )
     return data, ansible_vars_template
 
