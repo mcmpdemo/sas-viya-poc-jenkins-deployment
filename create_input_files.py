@@ -49,7 +49,7 @@ def read_fqdn_from_details(order_details):
 def open_ansible_vars_template(filename):
     ansible_vars_template = open(filename)
     data = yaml.load( ansible_vars_template, Loader=yaml.loader.SafeLoader )
-    return data
+    return data, ansible_vars_template
 
 if __name__ == "__main__":
 
@@ -90,7 +90,7 @@ if __name__ == "__main__":
 
     print("Render ansible vars template...")
 
-    template_object = open_ansible_vars_template("ansible-vars.yaml")
+    template_object, ansible_vars_template = open_ansible_vars_template("ansible-vars.yaml")
     template_object["NAMESPACE"]              = NAMESPACE
     template_object["V4_CFG_SAS_API_KEY"]     = V4_CFG_SAS_API_KEY
     template_object["V4_CFG_SAS_API_SECRET"]  = V4_CFG_SAS_API_SECRET
@@ -98,5 +98,6 @@ if __name__ == "__main__":
     template_object["V4_CFG_INGRESS_FQDN"]    = V4_CFG_INGRESS_FQDN
     template_object["V4_CFG_CADENCE_VERSION"] = V4_CFG_CADENCE_VERSION
 
-    print(template_object)
+    ansible_vars_template.write(yaml.dump(template_object))
+    ansible_vars_template.close()
 
