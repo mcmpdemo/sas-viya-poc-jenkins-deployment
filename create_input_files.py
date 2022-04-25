@@ -89,6 +89,13 @@ if __name__ == "__main__":
     V4_CFG_INGRESS_FQDN = read_fqdn_from_details(order_details)
 
     print("Render ansible vars template...")
+
     template_object = open_ansible_vars_template("ansible-vars.yaml")
+    template_object["NAMESPACE"]             = NAMESPACE
+    template_object["V4_CFG_SAS_API_KEY"]    = V4_CFG_SAS_API_KEY
+    template_object["V4_CFG_SAS_API_SECRET"] = V4_CFG_SAS_API_SECRET
+    template_object["V4_CFG_ORDER_NUMBER"]   = V4_CFG_ORDER_NUMBER
+    template_object["V4_CFG_INGRESS_FQDN"]   = V4_CFG_INGRESS_FQDN
+
     print(template_object)
 
