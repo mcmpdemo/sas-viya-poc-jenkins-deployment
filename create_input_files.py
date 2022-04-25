@@ -43,6 +43,14 @@ def create_id_rsa_file(raw_data):
     private_key_file.write(decoded)
     private_key_file.close()
 
+def read_fqdn_from_details(order_details):
+    return "jp-sas-viya-4-aks-91f5b069.hcp.eastus.azmk8s.io"
+
+def open_ansible_vars_template(filename):
+    ansible_vars_template = open(filename)
+    data = yaml.load( ansible_vars_template, Loader=yaml.loader.SafeLoader )
+    return data
+
 if __name__ == "__main__":
 
     USER_NAME = sys.argv[1]
@@ -76,4 +84,11 @@ if __name__ == "__main__":
 
     print("Creating id_rsa file...")
     create_id_rsa_file(ID_RSA)
+
+    print("Reading Cluster FQDN...")
+    V4_CFG_INGRESS_FQDN = read_fqdn_from_details(order_details)
+
+    print("Render ansible vars template...")
+    template_object = open_ansible_vars_template("ansible-vars.yaml")
+    print(template_object)
 
