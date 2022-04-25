@@ -1,4 +1,4 @@
-import sys
+import os
 import base64
 import requests
 import urllib.parse as urllib
@@ -54,22 +54,22 @@ def open_ansible_vars_template(filename):
 
 if __name__ == "__main__":
 
-    USER_NAME = sys.argv[1]
-    API_KEY = sys.argv[2]
-    ORDER_NUMBER = sys.argv[3]
-    TENANT_API_URL = sys.argv[4]
+    USER_NAME = os.getenv("USER_NAME")
+    API_KEY = os.getenv("API_KEY")
+    ORDER_NUMBER = os.getenv("ORDER_NUMBER")
+    TENANT_API_URL = os.getenv("TENANT_API_URL")
     
-    TF_STATE_FILE = sys.argv[5]
-    ANSIBLE_VARS_TEMPLATE = sys.argv[6]
+    TF_STATE_FILE = os.getenv("TF_STATE_FILE")
+    ANSIBLE_VARS_TEMPLATE = os.getenv("ANSIBLE_VARS_TEMPLATE")
     
-    V4_CFG_SAS_API_KEY = sys.argv[7]
-    V4_CFG_SAS_API_SECRET = sys.argv[8]
+    V4_CFG_SAS_API_KEY = os.getenv("V4_CFG_SAS_API_KEY")
+    V4_CFG_SAS_API_SECRET = os.getenv("V4_CFG_SAS_API_SECRET")
 
-    V4_CFG_ORDER_NUMBER = sys.argv[9]
+    V4_CFG_ORDER_NUMBER = os.getenv("V4_CFG_ORDER_NUMBER")
     
-    ID_RSA = sys.argv[10]
+    ID_RSA = os.getenv("ID_RSA")
 
-    V4_CFG_CADENCE_VERSION = sys.argv[11]
+    V4_CFG_CADENCE_VERSION = os.getenv("V4_CFG_CADENCE_VERSION")
 
     print("Getting order details...")
     order_details = get_order_details(USER_NAME, API_KEY, ORDER_NUMBER, TENANT_API_URL)
