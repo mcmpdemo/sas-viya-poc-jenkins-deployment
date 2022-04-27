@@ -14,6 +14,6 @@ if __name__ == "__main__":
     kube_config_file.close()
 
     resource_group_name = data["outputs"]["prefix"]["value"]+"-rg"
-    resource_group_name_file = open("infra_resource_group.temp")
+    resource_group_name_file = open("infra_resource_group.temp","w")
     resource_group_name_file.write(resource_group_name)
     resource_group_name_file.close()
