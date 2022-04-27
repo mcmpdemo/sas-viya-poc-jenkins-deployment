@@ -1,4 +1,5 @@
 import json
+import os
 
 if __name__ == "__main__":
     
@@ -11,3 +12,6 @@ if __name__ == "__main__":
     kube_config_file = open("kubeconfig","w")
     kube_config_file.write(kube_config_data)
     kube_config_file.close()
+
+    resource_group_name = data["outputs"]["prefix"]["value"]+"-rg"
+    os.environ["RG_GROUP"] = resource_group_name
